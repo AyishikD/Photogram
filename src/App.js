@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
 import Post from "./components/post/Post";
 import "./App.css";
-import { db, auth, fb } from "./firebase/FirebaseInit";
+import { db, auth, firebase } from "./firebase/FirebaseInit";
 import { makeStyles } from "@material-ui/core";
 import Modal from "@material-ui/core/Modal";
 import ImageUpload from "./components/imageUpload/ImageUpload";
+import Login from "./components/Login/Login.js";
+import Messi from "./Photo/Messi.jpg";
+import Ronaldo from "./Photo/Ronaldo.jpeg";
 
 function getModalStyle() {
   const top = 50;
@@ -29,7 +32,6 @@ const useStyles = makeStyles(() => ({
 }));
 
 function App() {
-  
   const classes = useStyles();
   const [modalStyle] = useState(getModalStyle);
   const [posts, setPosts] = useState([]);
@@ -38,32 +40,27 @@ function App() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  // create state to keep track of user
   const [user, setUser] = useState(null);
 
-  // For authentication - Signup
   useEffect(() => {
-    // listens to auth-based changes
-    auth.onAuthStateChanged((authUser) => {
+    const unsubscribe = auth.onAuthStateChanged((authUser) => {
       if (authUser) {
-        // user has logged in
-        console.log(authUser);
         setUser(authUser);
-        // function to keep the user logged in
       } else {
-        // user has logged out
-
         setUser(null);
       }
     });
-  }, [user, username]);
+
+    return () => {
+      unsubscribe();
+    };
+  }, []);
 
   useEffect(() => {
-    db.collection("posts")
+    const unsubscribe = db
+      .collection("posts")
       .orderBy("timestamp", "desc")
       .onSnapshot((snapshot) => {
-        // Everytime a new snapshot is noted (i.e. changes are made to posts in the database), this piece of code is fired
         setPosts(
           snapshot.docs.map((doc) => ({
             id: doc.id,
@@ -71,6 +68,10 @@ function App() {
           }))
         );
       });
+
+    return () => {
+      unsubscribe();
+    };
   }, []);
 
   const signUp = (e) => {
@@ -102,40 +103,35 @@ function App() {
     setEmail("");
     setPassword("");
   };
+
   useEffect(() => {
-    // Function to add dummy posts
     const addDummyPosts = async () => {
-      // Check if posts collection is empty
       const postsSnapshot = await db.collection("posts").get();
       if (postsSnapshot.empty) {
-        // Add dummy posts
         const dummyPosts = [
           {
             username: "dummyuser1",
             caption: "This is a dummy post 1",
-            imageUrl: "https://example.com/image1.jpg",
+            imageUrl: Messi,
           },
           {
             username: "dummyuser2",
             caption: "This is a dummy post 2",
-            imageUrl: "https://example.com/image2.jpg",
+            imageUrl: Ronaldo,
           },
-          // Add more dummy posts as needed
         ];
 
-        // Add each dummy post to the posts collection
         dummyPosts.forEach(async (post) => {
           await db.collection("posts").add({
             username: post.username,
             caption: post.caption,
             imageUrl: post.imageUrl,
-            timestamp: fb.firestore.FieldValue.serverTimestamp(),
+            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
           });
         });
       }
     };
 
-    // Call the function to add dummy posts
     addDummyPosts();
   }, []);
 
@@ -145,7 +141,7 @@ function App() {
         <div style={modalStyle} className={classes.paper}>
           <center>
             <img
-              src="	https://www.instagram.com/static/images/web/mobile_nav_type_logo.png/735145cfe0a4.png"
+              src="https://www.instagram.com/static/images/web/mobile_nav_type_logo.png/735145cfe0a4.png"
               alt="Instagram original logo"
             />
           </center>
@@ -172,22 +168,20 @@ function App() {
               Sign up
             </button>
           </form>
-
           <center className="authFooter">
             <small>
               &copy; 2023 Photogram by{" "}
-              <a href="mailto:bkrofegha@gmail.com@yahoo.com"> Ayishik Das</a>
+              <a href="mailto:bkrofegha@gmail.com@yahoo.com">Ayishik Das</a>
             </small>
           </center>
         </div>
       </Modal>
 
-      {/* Change modal open to be determined by openLogin */}
       <Modal open={openLogin} onClose={() => setOpenLogin(false)}>
         <div style={modalStyle} className={classes.paper}>
           <center>
             <img
-              src="	https://www.instagram.com/static/images/web/mobile_nav_type_logo.png/735145cfe0a4.png"
+              src="https://www.instagram.com/static/images/web/mobile_nav_type_logo.png/735145cfe0a4.png"
               alt="Instagram original logo"
             />
           </center>
@@ -208,11 +202,10 @@ function App() {
               Log in
             </button>
           </form>
-
           <center className="authFooter">
             <small>
               &copy; 2021 Instagram Tribute by{" "}
-              <a href="mailto:bkrofegha@gmail.com@yahoo.com"> Blessing Krofegha</a>
+              <a href="mailto:bkrofegha@gmail.com@yahoo.com">Blessing Krofegha</a>
             </small>
           </center>
         </div>
@@ -221,7 +214,7 @@ function App() {
       <div className="app__header">
         <div className="app__headerWrapper">
           <img
-            src="	https://www.instagram.com/static/images/web/mobile_nav_type_logo.png/735145cfe0a4.png"
+            src="https://www.instagram.com/static/images/web/mobile_nav_type_logo.png/735145cfe0a4.png"
             alt="Instagram original logo"
           />
           {user ? (
@@ -254,7 +247,7 @@ function App() {
           <Post
             key={id}
             postId={id}
-            user={user} // To pass current user to add current user when adding comment
+            user={user}
             username={post.username}
             caption={post.caption}
             imageUrl={post.imageUrl}

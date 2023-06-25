@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { storage, db, fb } from "../../firebase/FirebaseInit";
+import { storage, db, firebase } from "../../firebase/FirebaseInit";
 import "./ImageUpload.css";
 
 function ImageUpload({ user }) {
@@ -39,7 +39,7 @@ function ImageUpload({ user }) {
           .then((url) => {
             // Post image inside db
             db.collection("posts").add({
-              timestamp: fb.firestore.FieldValue.serverTimestamp(),
+              timestamp: firebase.firestore.FieldValue.serverTimestamp(),
               caption: caption,
               imageUrl: url,
               username: user.displayName,
