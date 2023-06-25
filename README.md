@@ -8,11 +8,11 @@ This project is a clone of the [Instagram](https://instagram.com) web app, built
 
 After forking or cloning the repo, you can run the following in the app directory:
 
-### `yarn`
+### `npm i` or `yarn install`.
 
 Installs the required dependencies.
 
-### `yarn start`
+### `yarn start` or `npm start`.
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
