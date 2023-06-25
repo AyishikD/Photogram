@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./Post.css";
 import Avatar from "@material-ui/core/Avatar";
-import { db, fb } from "../../firebase/FirebaseInit";
+import { db, firebase } from "../../firebase/FirebaseInit";
 
 function Post({ postId, user, username, caption, imageUrl }) {
   const [comments, setComments] = useState([]);
@@ -32,7 +32,7 @@ function Post({ postId, user, username, caption, imageUrl }) {
     db.collection("posts").doc(postId).collection("comments").add({
       text: comment,
       username: user.displayName,
-      timestamp: fb.firestore.FieldValue.serverTimestamp(),
+      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
     });
 
     setComment("");
@@ -59,15 +59,15 @@ function Post({ postId, user, username, caption, imageUrl }) {
       </h4>
 
       {/* List of comments */}
-      {
-        <div className={comments.length > 0 ? "post__comments" : ""}>
+      {comments.length > 0 && (
+        <div className="post__comments">
           {comments.map((comment) => (
-            <p>
+            <p key={comment.id}>
               <strong>{comment.username}</strong> {comment.text}
             </p>
           ))}
         </div>
-      }
+      )}
 
       {/* Form for adding comments */}
       {user && (

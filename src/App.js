@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Post from "./components/post/Post";
 import "./App.css";
-import { db, auth, fb } from "./firebase/FirebaseInit";
+import { db, auth, firebase } from "./firebase/FirebaseInit";
 import { makeStyles } from "@material-ui/core";
 import Modal from "@material-ui/core/Modal";
 import ImageUpload from "./components/imageUpload/ImageUpload";
+import Login from "./components/Login/Login.js";
 
 function getModalStyle() {
   const top = 50;
@@ -129,7 +130,7 @@ function App() {
             username: post.username,
             caption: post.caption,
             imageUrl: post.imageUrl,
-            timestamp: fb.firestore.FieldValue.serverTimestamp(),
+            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
           });
         });
       }
