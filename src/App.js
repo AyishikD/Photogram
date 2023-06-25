@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Post from "./components/post/Post";
 import "./App.css";
 import { db, auth, firebase } from "./firebase/FirebaseInit";
@@ -41,6 +42,8 @@ function App() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [user, setUser] = useState(null);
+  
+
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((authUser) => {
@@ -134,6 +137,10 @@ function App() {
 
     addDummyPosts();
   }, []);
+
+  if (!user) {
+    return <Login />;
+  }
 
   return (
     <div className="app">
@@ -258,4 +265,14 @@ function App() {
   );
 }
 
-export default App;
+
+export default function AppWrapper() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<App />} />
+      </Routes>
+    </Router>
+  );
+}
+
