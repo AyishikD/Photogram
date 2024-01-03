@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/static/css/main.3f240135.chunk.css",
+    "main.js": "/static/js/main.fc63de97.chunk.js",
+    "main.js.map": "/static/js/main.fc63de97.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.98d3ccff.js",
+    "runtime-main.js.map": "/static/js/runtime-main.98d3ccff.js.map",
+    "static/js/2.a5d9c294.chunk.js": "/static/js/2.a5d9c294.chunk.js",
+    "static/js/2.a5d9c294.chunk.js.map": "/static/js/2.a5d9c294.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/main.3f240135.chunk.css.map": "/static/css/main.3f240135.chunk.css.map",
+    "static/js/2.a5d9c294.chunk.js.LICENSE.txt": "/static/js/2.a5d9c294.chunk.js.LICENSE.txt",
+    "static/media/Messi.2f3c1640.jpg": "/static/media/Messi.2f3c1640.jpg",
+    "static/media/Ronaldo.653ff3fa.jpeg": "/static/media/Ronaldo.653ff3fa.jpeg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.98d3ccff.js",
+    "static/js/2.a5d9c294.chunk.js",
+    "static/css/main.3f240135.chunk.css",
+    "static/js/main.fc63de97.chunk.js"
+  ]
+}
