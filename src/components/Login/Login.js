@@ -1,5 +1,9 @@
 import React, { useState } from "react";
 import { auth, firebase } from "../../firebase/FirebaseInit";
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { faGoogle } from '@fortawesome/free-brands-svg-icons';
+import { FaGoogle }  from "react-icons/fa";
+
 import './Login.css';
 
 function Login() {
@@ -61,34 +65,52 @@ function Login() {
   return (
     <div className="login-container">
       <h2>Login Page</h2>
+      <div className="login-box">
+        
       <form className="login-form" onSubmit={handleEmailLogin}>
         {/* Email login */}
-        <label>
-          Email:
+        <h2>Photogram</h2>
+       <div className="email-d">
           <input
             type="email"
+            placeholder="Enter email id"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-        </label>
-        <label>
-          Password:
+      </div>
+     
+        <div className="password-d">
           <input
             type="password"
+            placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-        </label>
-        <button type="submit">Email Login</button>
+        </div>
+        <button type="submit">Login</button>
+         <div className="line">
+            <span className="arrow"></span>
+            <span className="content">OR</span>
+            <span className="arrow"></span>
+          </div>
+
+          <div className="google_icon">
+             {/* <button className="google_icon" onClick={handleGoogleLogin}> */}
+                 <FaGoogle/>
+             {/* </button> */}
+            <span>Log in with Google</span>
+          </div>
+          <p>Forgot password?</p>
       </form>
   
       {/* Google login */}
-      <button className="login-form-button" onClick={handleGoogleLogin}>
+      {/* <button className="login-form-button" onClick={handleGoogleLogin}>
         Google Login
-      </button>
-  
+      </button> */}
+  </div>
+
       {/* Phone number login */}
-      <form className="login-form" onSubmit={handlePhoneNumberLogin}>
+      {/* <form className="login-form" onSubmit={handlePhoneNumberLogin}>
         <input
           type="text"
           placeholder="Enter phone number"
@@ -96,7 +118,9 @@ function Login() {
           onChange={(e) => setPhoneNumber(e.target.value)}
         />
         <button type="submit">Phone Number Login</button>
-      </form>
+      </form> */}
+      <div className="sign-up">
+      <p>Don't have a accout? <span>Sign Up</span></p></div>
     </div>
   );
   }  
