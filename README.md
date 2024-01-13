@@ -1,5 +1,5 @@
 # <div align="center">Photogram </div>
-Welcome to Photogram – your go-to destination for a stunning Instagram(https://instagram.com)-like experience!
+Welcome to Photogram – your go-to destination for a stunning Instagram(https://instagram.com) -like experience!
 
 
 ## Table of Contents
@@ -21,11 +21,11 @@ This web application is a reproduction of the popular Instagram platform, built 
 - REACTJS
 - FIREBASE
 
-<img src="html.png" height="50">
-<img src="css.jpeg" height="50">
-<img src="java.jpg" height="50">
-<img src="react.png" height="50">
-<img src="firebase.png" height="50">
+<img src="https://github.com/Sneha123-zudo/Photogram/assets/145490348/ae4d996a-07a4-41cf-bdf8-39a03b0ba48d" height="50">
+<img src="https://github.com/Sneha123-zudo/Photogram/assets/145490348/ef2935ec-80c6-434e-acbd-92f810217198" height="50">
+<img src="https://github.com/Sneha123-zudo/Photogram/assets/145490348/aff2edeb-ed67-4f35-9aa8-74488f9f2c56" height="50">
+<img src="https://github.com/Sneha123-zudo/Photogram/assets/145490348/e5e54338-1b8b-4c23-aec4-270dae225f52" height="50">
+<img src="https://github.com/Sneha123-zudo/Photogram/assets/145490348/1d66654c-5f92-43f0-9b84-0df9d3bed453" height="50">
 
 ## Overview⭐
 
